@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Predictor</title>
+</head>
+<body>
+    <div class="row"> <!-- Button to create new classes -->
+        <input type="text" id="new-class-name" placeholder="Enter class name">
+        <button onclick="addClass()">Add Class</button>
+    </div>
+
+    <div id="tabs">  <!-- This is the list of existing classes --> </div>
+
+    <div id="contents">  <!-- This is the contents (assignments, weights) of the classes --> </div>
+
+    <script>
+        // Stores the classes
+        let textBoxCounts = {};
+
+        // Switches between tabs and renders only the current class
+        function openTab(evt, className) {
+            var tabcontent = document.getElementsByClassName("tab");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            document.getElementById(className).style.display = "block";
+        }
+
+        // Add new input field and weight field
+        function addAssignment(className) {
+            textBoxCounts[className]++;
+            const container = document.getElementById("container-" + className);
+
+            const inputLabel = document.createElement("label");
+            inputLabel.textContent = "Assignment " + textBoxCounts[className] + ": ";
+            container.appendChild(inputLabel);
+            
+            const input = document.createElement("input");
+            input.type = "number";
+            input.placeholder = "Percent out of 100";
+            input.classList.add("input");
+            container.appendChild(input);
+
+            const weightLabel = document.createElement("label");
+            weightLabel.textContent = "Weight " + textBoxCounts[className] + ": ";
+            container.appendChild(weightLabel);
+
+            const weight = document.createElement("input");
+            weight.type = "number";
+            weight.placeholder = "Enter a weight from 0 to 1";
+            weight.classList.add("weight");
+            container.appendChild(weight);
+            container.appendChild(document.createElement("br"));
+        }
+
+        // Sums up the weights to check if it is equal to 1
+        function checkTotalWeight(className) {
+            const weights = document.querySelectorAll("#container-" + className + " .weight");
+            let sum = 0;
+            weights.forEach(weight => {
+                if (!isNaN(parseFloat(weight.value))) {
+                    sum += parseFloat(weight.value);
+                }
+            });
+
+            return (sum === 1);
+        }
+
+        // Calcuates the weighted average
+        function calculateAverage(className) {
+            if(checkTotalWeight(className)){
+                const inputs = document.querySelectorAll("#container-" + className + " .input");
+                const weights = document.querySelectorAll("#container-" + className + " .weight");
+                let sum = 0;
+                let weightSum = 0;
+                inputs.forEach((input, index) => {
+                    if (!isNaN(parseFloat(input.value)) && !isNaN(parseFloat(weights[index].value))) {
+                        sum += parseFloat(input.value) * parseFloat(weights[index].value);
+                        weightSum += parseFloat(weights[index].value);
+                    } else {
+                        alert("Please enter valid numbers in all input fields.");
+                    }
+                });
+
+                if (weightSum > 0) {
+                    const average = sum / weightSum;
+                    const output = document.getElementById("output-" + className);
+                    output.textContent = "Final Grade Average: " + average.toFixed(2);
+                }
+            } else { alert("Weights must sum to 1."); }
+        }
+
+        // Adds a class to the page
+        function addClass() {
+            const className = document.getElementById("new-class-name").value.trim();
+            if (className) {
+                if (!textBoxCounts.hasOwnProperty(className)) {
+                    textBoxCounts[className] = 0;
+
+                    const tabs = document.getElementById("tabs");
+                    const contents = document.getElementById("contents");
+
+                    const newClass = document.createElement("div");
+                    newClass.id = className;
+                    newClass.className = "tab";
+                    newClass.style.display = "none";
+
+                    const classHeader = document.createElement("h3");
+                    classHeader.textContent = className + " Class";
+                    newClass.appendChild(classHeader);
+
+                    const container = document.createElement("div");
+                    container.id = "container-" + className;
+                    newClass.appendChild(container);
+
+                    const addAssignmentBtn = document.createElement("button");
+                    addAssignmentBtn.textContent = "Add New Assignment";
+                    addAssignmentBtn.onclick = function() {
+                        addAssignment(className);
+                    };
+                    newClass.appendChild(addAssignmentBtn);
+                    newClass.appendChild(document.createElement("br"));
+
+                    const calculateBtn = document.createElement("button");
+                    calculateBtn.textContent = "Calculate Average";
+                    calculateBtn.onclick = function() {
+                        calculateAverage(className);
+                    };
+                    newClass.appendChild(calculateBtn);
+
+                    const output = document.createElement("div");
+                    output.id = "output-" + className;
+                    newClass.appendChild(output);
+                    contents.appendChild(newClass);
+
+                    const button = document.createElement("button");
+                    button.className = "tablinks";
+                    button.textContent = className + " Class";
+                    button.onclick = function() { openTab(event, className); };
+                    tabs.appendChild(button, tabs.lastElementChild);
+
+                    // Clear the input field
+                    document.getElementById("new-class-name").value = "";
+
+                } else { alert("Please enter a unique class name."); }
+            } else { alert("Please enter a class name.");  }
+        }
+    </script>
+</body>
+</html>
