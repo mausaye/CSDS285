@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabbed App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .tabs {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tab {
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background-color: #ddd;
+        }
+
+        .content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        img {
+            width: 30%; /* Set the width to 200 pixels */
+            height: auto; /* Let the height adjust proportionally */
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="tabs">
+        <li class="tab" onclick="openTab(event, 'page1')">Page 1</li>
+        <li class="tab" onclick="openTab(event, 'page2')">Page 2</li>
+        <li class="tab" onclick="openTab(event, 'page3')">Page 3</li>
+    </ul>
+
+    <div id="page1" class="content">
+        <h2>Happy Birthday Application</h2>
+        <p>This app takes data from a csv file and sends happy birthday to anyone who has a birthday today.</p>
+        
+        <p>Figure 1. Example CSV</p>
+        <img src="images/csvfilepic.png">
+        
+        <p>Figure 2. Running script</p>
+        <img src="images/runbday.png">
+        
+        <p>Figure 3. Email example</p>
+        <img src="images/email.png">
+ 
+        <p>Figure 4. Email data</p>
+        <img src="images/tofrom.png">
+
+        <p>Figure 5. Code</p>
+        <img src="images/bdaycode1.png">
+        <img src="images/bdaycode2.png">
+
+        
+    </div>
+    <div id="page2" class="content">
+        <h2>Git Shortcut</h2>
+        <p>I was too lazy to always type git add, commit, and push.</p>
+        <p>Figure 1. Code</p>
+        <img src="images/git.png">
+    </div>
+    <div id="page3" class="content">
+        <h2>Page 3</h2>
+        <p>This is the content of Page 3.</p>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        // Open the first tab by default
+        document.getElementsByClassName("tab")[0].click();
+    </script>
+</body>
+
+</html>
