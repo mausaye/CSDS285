@@ -1,0 +1,97 @@
+<!-- This is the draft of the calculator project. This was not fully working as you could not add assignments.
+This version also does not allow for multiple class creation. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Predictor</title>
+</head>
+<body>
+    <div id="contents">  <!-- This is the contents (assignments, weights) of the classes --> </div>
+
+    <script>
+        let textBoxCounts = {};
+        const contents = document.getElementById("contents");
+
+        const addAssignmentBtn = document.createElement("button");
+        addAssignmentBtn.textContent = "Add New Assignment";
+        addAssignmentBtn.onclick = function() {
+            addAssignment("test");
+        };
+        contents.appendChild(addAssignmentBtn);
+
+        const calculateBtn = document.createElement("button");
+        calculateBtn.textContent = "Calculate Average";
+        calculateBtn.onclick = function() {
+            calculateAverage("test");
+        };
+        contents.appendChild(calculateBtn);
+        
+        // Add new input field and weight field
+        function addAssignment(className) {
+            textBoxCounts[className]++;
+
+            const inputLabel = document.createElement("label");
+            inputLabel.textContent = "Assignment " + textBoxCounts[className] + ": ";
+            container.appendChild(inputLabel);
+            
+            const input = document.createElement("input");
+            input.type = "number";
+            input.placeholder = "Percent out of 100";
+            input.classList.add("input");
+            container.appendChild(input);
+
+            const weightLabel = document.createElement("label");
+            weightLabel.textContent = "Weight " + textBoxCounts[className] + ": ";
+            container.appendChild(weightLabel);
+
+            const weight = document.createElement("input");
+            weight.type = "number";
+            weight.placeholder = "Enter a weight from 0 to 1";
+            weight.classList.add("weight");
+            container.appendChild(weight);
+            container.appendChild(document.createElement("br"));
+        }
+
+        // Sums up the weights to check if it is equal to 1
+        function checkTotalWeight(className) {
+            const weights = document.querySelectorAll("#container-" + className + " .weight");
+            let sum = 0;
+            weights.forEach(weight => {
+                if (!isNaN(parseFloat(weight.value))) {
+                    sum += parseFloat(weight.value);
+                }
+            });
+
+            return (sum === 1);
+        }
+
+        // Calcuates the weighted average
+        function calculateAverage(className) {
+            if(checkTotalWeight(className)){
+                const inputs = document.querySelectorAll("#container-" + className + " .input");
+                const weights = document.querySelectorAll("#container-" + className + " .weight");
+                let sum = 0;
+                let weightSum = 0;
+                inputs.forEach((input, index) => {
+                    if (!isNaN(parseFloat(input.value)) && !isNaN(parseFloat(weights[index].value))) {
+                        sum += parseFloat(input.value) * parseFloat(weights[index].value);
+                        weightSum += parseFloat(weights[index].value);
+                    } else {
+                        alert("Please enter valid numbers in all input fields.");
+                    }
+                });
+
+                if (weightSum > 0) {
+                    const average = sum / weightSum;
+                    const output = document.getElementById("output-" + className);
+                    output.textContent = "Final Grade Average: " + average.toFixed(2);
+                }
+            } else { alert("Weights must sum to 1."); }
+        }
+
+    </script>
+</body>
+</html>
