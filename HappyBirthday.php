@@ -19,7 +19,7 @@ require 'PHPMailer-master/src/SMTP.php';
 
     $mail = new PHPMailer;
 
-$mail->SMTPDebug = SMTP::DEBUG_SERVER;    //Enable verbose debug output 
+//$mail->SMTPDebug = SMTP::DEBUG_SERVER;    //Enable verbose debug output 
 $mail->isSMTP();                            // Set mailer to use SMTP 
 $mail->Host = 'smtp.gmail.com';           // Specify main and backup SMTP servers 
 $mail->SMTPAuth = true;                     // Enable SMTP authentication 
@@ -32,15 +32,7 @@ $mail->Port = 587;                          // TCP port to connect to
 $mail->setFrom('lintammy1000@gmail.com', 'Tammy Lin'); 
 $mail->addReplyTo('lintammy1000@gmail.com', 'Tammy Lin'); 
  
-// Add a recipient 
-
- 
-//$mail->addCC('cc@example.com'); 
-//$mail->addBCC('bcc@example.com'); 
- 
     if(($file = fopen("birthdays.csv", "r")) !== false) {
-
-    //fgetcsv($file); // retrieves header
 
     while(($data = fgetcsv($file)) !== false){
         $name = $data[0];
