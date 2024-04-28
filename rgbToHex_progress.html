@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RGB to Hex Converter</title>
+    <script>
+        function rgbToHex() {
+            var r = parseInt(document.getElementById('red').value);
+            var g = parseInt(document.getElementById('green').value);
+            var b = parseInt(document.getElementById('blue').value);
+
+            var hex = '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+            document.getElementById('hexOutput').innerText = hex;
+        }
+
+        function componentToHex(c) {
+            var hex = c.toString(16);
+            return hex.length == 1 ? '0' + hex : hex;
+        }
+    </script>
+</head>
+<body>
+    <input type="number" id="red" min="0" max="255" value="0"><br><br>
+    <input type="number" id="green" min="0" max="255" value="0"><br><br>
+    <input type="number" id="blue" min="0" max="255" value="0"><br><br>
+    
+    <button onclick="rgbToHex()">Generate Hex</button><br><br>
+    
+    <div id="hexOutput"></div>
+</body>
+</html>

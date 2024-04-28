@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabbed App</title>
+    <title>CSDS 285 Portfolio</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -39,8 +39,8 @@
         }
 
         img {
-            width: 30%; /* Set the width to 200 pixels */
-            height: auto; /* Let the height adjust proportionally */
+            width: 30%; 
+            height: auto;
         }
     </style>
 </head>
@@ -50,11 +50,14 @@
         <li class="tab" onclick="openTab(event, 'page1')">Page 1</li>
         <li class="tab" onclick="openTab(event, 'page2')">Page 2</li>
         <li class="tab" onclick="openTab(event, 'page3')">Page 3</li>
+        <li class="tab" onclick="openTab(event, 'page4')">Page 4</li>
+        <li class="tab" onclick="openTab(event, 'page5')">Page 5</li>
+        <li class="tab" onclick="openTab(event, 'page6')">Page 6</li>
     </ul>
 
     <div id="page1" class="content">
         <h2>Happy Birthday Application</h2>
-        <p>This app takes data from a csv file and sends happy birthday to anyone who has a birthday today.</p>
+        <p>This app takes data from a csv file and sends happy birthday to anyone who has a birthday today. </p>
         
         <p>Figure 1. Example CSV</p>
         <img src="images/csvfilepic.png">
@@ -72,17 +75,108 @@
         <img src="images/bdaycode1.png">
         <img src="images/bdaycode2.png">
 
+        <p>Figure 5. In-Progress Code</p>
+        <p>
+            This was intially started using https://www.w3schools.com/php/func_mail_mail.asp; however, the email configurations were a lot more complicated than this.
+            Thus, I looked up more about email configurations and used this resource: https://github.com/PHPMailer/PHPMailer
+        </p>
+        <img src="images/bday_progress.png">
+
         
     </div>
+
     <div id="page2" class="content">
         <h2>Git Shortcut</h2>
-        <p>I was too lazy to always type git add, commit, and push.</p>
+        <p>I was too lazy to always type git add, commit, and push. This bash script was used for speedy commit/ pushing.</p>
+        
         <p>Figure 1. Code</p>
         <img src="images/git.png">
+
+        <p>Figure 2. Running Code</p>
+        <img src="images/gitres.png">
+
     </div>
+
     <div id="page3" class="content">
-        <h2>Page 3</h2>
-        <p>This is the content of Page 3.</p>
+        <h2>Grade Calculator</h2>
+        <p>This app allows you to calculate the grade you will get for a class. You can add classes, assignments, and assignment grade weights.</p>
+    
+        <p>Figure 1. Landing Screen Prompting for Class</p>
+        <img src="images/landinggrade.png">
+        
+        <p>Figure 2. Creating a class and assignments</p>
+        <img src="images/gradelinux.png">
+        
+        <p>Figure 3. Creating multiple classes</p>
+        <img src="images/gradeos.png">
+ 
+        <p>Figure 4. Error handling</p>
+        <img src="images/gradeerror.png">
+
+        <p>Figure 4. Code</p>
+        <img src="images/calc1.png">
+
+        <img src="images/calc2.png">
+
+        <img src="images/calc3.png">
+
+        <img src="images/calc4.png">
+
+        <img src="images/calc5.png">
+
+        <p>Figure 5. Progress Code</p>
+        <p>This project was started using ChatGPT for the template provide a simple input field and button. 
+            Additionally, ChatGPT was used to make the code more clean i.e. loops changed into forEach((input, index) => )</p>
+        <img src="images/calc1.png">
+
+        <img src="images/calc2.png">
+    </div>
+
+    <div id="page4" class="content">
+        <h2>Password Generator</h2>
+        <p>AWK Password Generator. First it takes your name, birthday, and favorite color. Then it makes it all lowercase, shuffles, and append random characters. Lastly the characters are shuffled one more time.
+            ChatGPT was used to help create a shuffle function. Initially my shuffle was too systematic, making the password easily guessed.
+        </p>
+        <p>Figure 1. Code</p>
+        <img src="images/passwordcode.png">
+
+        <p>Figure 2. Running Code</p>
+        <img src="images/passwordEx.png">
+
+        <p>Figure 3. Progress Code</p>
+        <img src="images/pass_progress.png">
+    </div>
+
+    <div id="page5" class="content">
+        <h2>Bash Counter</h2>
+        <p>Counts the number of times you pressed enter.</p>
+        <p>Figure 1. Code</p>
+        <img src="images/bashCountercode.png">
+
+        <p>Figure 2. Running Code</p>
+        <img src="images/testBashCounter.png">
+    </div>
+
+    <div id="page6" class="content">
+        <h2>RGB to Hex generator</h2>
+        <p>Converts a colors RBG to Hex and shows the color equivalent. This html/ javascript application generates the hex equivalent of an RBG color code. Then the color will be displayed.
+            ChatGPT was used to set up the HTML template.
+        </p>
+        <p>Figure 1. Code</p>
+        <img src="images/rgb1.png">
+        <img src="images/rgb2.png">
+
+        <p>Figure 2. Landing Screen</p>
+        <img src="images/rgbdefault.png">
+
+        <p>Figure 3. General Use Case</p>
+        <img src="images/rgbtest.png">
+
+        <p>Figure 4. Error Checks</p>
+        <img src="images/rbgerror.png">
+
+        <p>Figure 5. RGB Progress</p>
+        <img src="images/rbg_progress.png">
     </div>
 
     <script>

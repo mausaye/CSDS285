@@ -5,7 +5,6 @@ function shuffle_string(str,    i, j, tmp, shuffled) {
     for (i = 1; i <= length(str); i++) {
         shuffled[i] = i;
     }
-
     # Shuffle the indices
     for (i = length(str); i > 1; i--) {
         j = int(rand() * i) + 1;
@@ -13,7 +12,6 @@ function shuffle_string(str,    i, j, tmp, shuffled) {
         shuffled[j] = shuffled[i];
         shuffled[i] = tmp;
     }
-
     # Create the shuffled string
     shuffled_str = "";
     for (i = 1; i <= length(str); i++) {
@@ -22,7 +20,6 @@ function shuffle_string(str,    i, j, tmp, shuffled) {
 
     return shuffled_str;
 }
-
 BEGIN {
     srand();  # Seed the random number generator
     print "Enter your name:";
@@ -39,12 +36,10 @@ BEGIN {
 
     # Add more characters to the password
     charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    for (i = 1; i <= 4; i++) {
+    for (i = 1; i <= 5; i++) {
         password = password substr(charset, int(rand() * length(charset)) + 1, 1);
     }
-
     # Shuffle the order of the characters in the password
     password = shuffle_string(password);
-
     print "Your random password is: " password;
 }

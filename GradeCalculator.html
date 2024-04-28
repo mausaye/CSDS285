@@ -18,6 +18,7 @@
     <script>
         // Stores the classes
         let textBoxCounts = {};
+        var error = 0.001;
 
         // Switches between tabs and renders only the current class
         function openTab(evt, className) {
@@ -65,12 +66,13 @@
                 }
             });
 
-            return (sum === 1);
+            return (sum === 1 || (sum > 1-error && sum < 1 + error));
         }
 
         // Calcuates the weighted average
         function calculateAverage(className) {
-            if(checkTotalWeight(className)){
+            var val = checkTotalWeight(className)
+            if(val){
                 const inputs = document.querySelectorAll("#container-" + className + " .input");
                 const weights = document.querySelectorAll("#container-" + className + " .weight");
                 let sum = 0;
@@ -89,12 +91,15 @@
                     const output = document.getElementById("output-" + className);
                     output.textContent = "Final Grade Average: " + average.toFixed(2);
                 }
-            } else { alert("Weights must sum to 1."); }
+            } else { 
+                alert("Weights must sum to 1."); 
+            }
         }
 
         // Adds a class to the page
         function addClass() {
-            const className = document.getElementById("new-class-name").value.trim();
+            const className = document.getElementById("new-class-name").value.trim().replace(/ /g, "-");
+
             if (className) {
                 if (!textBoxCounts.hasOwnProperty(className)) {
                     textBoxCounts[className] = 0;
